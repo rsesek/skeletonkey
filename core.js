@@ -70,6 +70,8 @@ SkeletonKey.prototype._init = function() {
   this._generateButton.onclick = this._onGenerate.bind(this);
 
   this._password.labels[0].onclick = this._selectPassword.bind(this);
+
+  this._initChromeExtension();
 };
 
 /**
@@ -140,4 +142,27 @@ SkeletonKey.prototype._capitalizeKey = function(key) {
 SkeletonKey.prototype._selectPassword = function() {
   this._password.focus();
   this._password.select();
+};
+
+/**
+ * Initalizes the Chrome extension pieces if running inside chrome.
+ * @private
+ */
+SkeletonKey.prototype._initChromeExtension = function() {
+  return;
+  if (typeof chrome == 'undefined' || typeof chrome.extension == 'undefined')
+    return;
+
+  // getCurrent is undefined for backround pages. Need content script.
+  chrome.tabs.getCurrent(function (tab) {
+    if (tab == null)
+      return;
+
+    var url = tab.url;
+    if (url == null || url == "")
+      return;
+
+    var siteKey = url.search(/https?:\/\/(www.?|login|accounts?)\.(.*)\.(com?|net|org|edu|biz|info)?.*/);
+    console.log(siteKey);
+  });
 };
