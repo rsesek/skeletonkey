@@ -45,18 +45,37 @@ li label {
   width: 12em;
   text-align: right;
   display: inline-block;
+  font-weight: bold;
 }
 
 li input {
-  padding: .2em;
+  padding: .3em;
   width: 20em;
   font-size: 1em;
+
+  border-color: #CCCCCC;
+  border-style: solid;
+  border-width: .1em;
+}
+
+li input:focus {
+  outline: rgb(15, 74, 169) solid .1em;
 }
 
 button {
   font-size: 1em;
-  padding: .3em;
+  padding: .5em 1.0em;
   float: right;
+
+  background-color: #CECECE;
+  border-color: #909090;
+  border-style: solid;
+  border-width: .1em;
+  border-radius: .2em;
+}
+
+button:active {
+  border-color: rgb(15, 74, 169);
 }
 
 .clear {
