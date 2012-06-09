@@ -45,6 +45,12 @@ SkeletonKey.prototype.ITERATIONS = 1000;
 SkeletonKey.prototype.KEYSIZE = 256/32;
 
 /**
+ * The minimum length of a password.
+ * @const {int}
+ */
+SkeletonKey.prototype.MIN_LENGTH = 6;
+
+/**
  * Initializes event handlers for the page.
  * @private
  */
@@ -59,8 +65,55 @@ SkeletonKey.prototype._init = function() {
  */
 SkeletonKey.prototype._onGenerate = function(e) {
   var salt = this._username.value + '@' + this._sitekey.value;
+
   // |key| is a WordArray of 32-bit words.
   var key = CryptoJS.PBKDF2(this._master.value, salt,
       {keySize: this.KEYSIZE, iterations: this.ITERATIONS});
-  console.log(key);
+  var hexString = key.toString();
+  hexString = this._capitalizeKey(hexString);
+  this._password.value = hexString;
+};
+
+/**
+ * Takes a HEX string and returns a mixed-case string.
+ * @param {string} key
+ * @return string
+ * @private
+ */
+SkeletonKey.prototype._capitalizeKey = function(key) {
+  // |key| is too long for a decent password, so try and use the second half of
+  // it as the basis for capitalizing the key.
+  var capsSource = null;
+  var keyLength = key.length;
+  if (keyLength / 2 <= this.MIN_LENGTH) {
+    capsSouce = key.substr(0, keyLength - this.MIN_LENGTH);
+  } else {
+    capsSource = key.substr(keyLength / 2);
+  }
+
+  if (!capsSource || capsSource.length < 1) {
+    return key;
+  }
+
+  key = key.substr(0, capsSource.length);
+  var capsSourceLength = capsSource.length;
+
+  var j = 0;
+  var newKey = "";
+  for (var i = 0; i < key.length; i++) {
+    var c = key.charCodeAt(i);
+    // If this is not a lowercase letter or there's no more source, skip.
+    if (c < 0x61 || c > 0x7A || j >= capsSourceLength) {
+      newKey += key[i];
+      continue;
+    }
+
+    var makeCap = capsSource.charCodeAt(j++) % 2;
+    if (makeCap)
+      newKey += String.fromCharCode(c - 0x20);
+    else
+      newKey += key[i];
+  }
+
+  return newKey;
 };
