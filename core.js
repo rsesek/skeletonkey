@@ -68,6 +68,8 @@ SkeletonKey.prototype.MIN_LENGTH = 6;
  */
 SkeletonKey.prototype._init = function() {
   this._generateButton.onclick = this._onGenerate.bind(this);
+
+  this._password.labels[0].onclick = this._selectPassword.bind(this);
 };
 
 /**
@@ -84,8 +86,7 @@ SkeletonKey.prototype._onGenerate = function(e) {
   var hexString = key.toString();
   hexString = this._capitalizeKey(hexString);
   this._password.value = hexString;
-  this._password.focus();
-  this._password.select();
+  this._selectPassword();
 };
 
 /**
@@ -130,4 +131,13 @@ SkeletonKey.prototype._capitalizeKey = function(key) {
   }
 
   return newKey;
+};
+
+/**
+ * Selects the contents of the generated password.
+ * @private
+ */
+SkeletonKey.prototype._selectPassword = function() {
+  this._password.focus();
+  this._password.select();
 };
