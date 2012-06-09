@@ -77,6 +77,8 @@ SkeletonKey.prototype._init = function() {
   this._password.labels[0].onclick = this._selectPassword.bind(this);
 
   this._initChromeExtension();
+
+  this._master.focus();
 };
 
 /**
