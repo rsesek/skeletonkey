@@ -69,6 +69,10 @@ SkeletonKey.prototype.MIN_LENGTH = 6;
 SkeletonKey.prototype._init = function() {
   this._generateButton.onclick = this._onGenerate.bind(this);
 
+  this._master.onkeyup = this._nextFieldInterceptor.bind(this);
+  this._sitekey.onkeyup = this._nextFieldInterceptor.bind(this);
+  this._username.onkeyup = this._nextFieldInterceptor.bind(this);
+
   this._password.onclick = this._selectPassword.bind(this);
   this._password.labels[0].onclick = this._selectPassword.bind(this);
 
@@ -134,6 +138,27 @@ SkeletonKey.prototype._capitalizeKey = function(key) {
   }
 
   return newKey;
+};
+
+/**
+ * Checks if the given key event is from the enter key and moves onto the next
+ * field or generates the password.
+ * @param {Event} e
+ * @private
+ */
+SkeletonKey.prototype._nextFieldInterceptor = function(e) {
+  if (e.keyCode != 0xD)
+    return;
+
+  if (this._master.value == "") {
+    this._master.focus();
+  } else if (this._sitekey.value == "") {
+    this._sitekey.focus();
+  } else if (this._username.value == "") {
+    this._username.focus();
+  } else {
+    this._generateButton.click();
+  }
 };
 
 /**
