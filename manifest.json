@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+
+  "name": "Skeleton Key",
+  "version": "0.1",
+
+  "description": "A secure password generator that uses repeated hashing of your master password and some salt.",
+
+  "browser_action": {
+    "default_title": "Skeleton Key",
+    "default_popup": "core.html"
+  }
+}

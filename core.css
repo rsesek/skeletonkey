@@ -26,7 +26,11 @@
 
 body {
   font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
-  font-size: 1em;
+  font-size: .8em;
+
+  padding: .2em;
+
+  width: 34em;
 }
 
 ol {
@@ -45,11 +49,16 @@ li label {
 
 li input {
   padding: .2em;
-  width: 15em;
-  font-size: .8em;
+  width: 20em;
+  font-size: 1em;
 }
 
 button {
   font-size: 1em;
   padding: .3em;
+  float: right;
+}
+
+.clear {
+  clear: both;
 }
