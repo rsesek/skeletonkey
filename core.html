@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Skeleton Key</title>
+    <script type="text/javascript" src="pbkdf2.js"></script>
+    <script type="text/javascript" src="core.js"></script>
+    <script type="text/javascript">
+      if (typeof chrome.extension !== 'undefined') {
+        // TODO: load the extension JS
+      } else {
+        // TODO: load the hosted JS
+      }
+    </script>
+  </head>
+  <body>
+    <form autocomplete="off">
+      <ol>
+        <li>
+          <label for="master">Master Password</label>
+          <input type="password" id="master" />
+        </li>
+
+        <li>
+          <label for="sitekey">Site Key</label>
+          <input type="text" id="sitekey" />
+        </li>
+
+        <li>
+          <label for="username">Username</label>
+          <input type="text" id="username" />
+        </li>
+
+        <li>
+          <label for="password">Computed Password</label>
+          <input type="text" id="password" />
+        </li>
+
+        <li>
+          <button type="button" id="generate">Hash</button>
+        </li>
+      </ol>
+    </form>
+
+    <script type="text/javascript">
+      var controller = new SkeletonKey(document);
+    </script>
+  </body>
+</html>
