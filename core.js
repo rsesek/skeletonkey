@@ -19,6 +19,18 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+(function main() {
+  if (typeof chrome !== 'undefined') {
+    // TODO: load the extension JS
+  } else {
+    // TODO: load the hosted JS
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var controller = new SkeletonKey(document);
+  });
+})();
+
 /**
  * SkeletonKey is view controller for generating secure passwords.
  *
@@ -72,6 +84,8 @@ SkeletonKey.prototype._onGenerate = function(e) {
   var hexString = key.toString();
   hexString = this._capitalizeKey(hexString);
   this._password.value = hexString;
+  this._password.focus();
+  this._password.select();
 };
 
 /**
