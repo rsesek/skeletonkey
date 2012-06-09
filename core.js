@@ -69,6 +69,7 @@ SkeletonKey.prototype.MIN_LENGTH = 6;
 SkeletonKey.prototype._init = function() {
   this._generateButton.onclick = this._onGenerate.bind(this);
 
+  this._password.onclick = this._selectPassword.bind(this);
   this._password.labels[0].onclick = this._selectPassword.bind(this);
 
   this._initChromeExtension();
