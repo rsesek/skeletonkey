@@ -43,7 +43,12 @@ var SkeletonKey = SkeletonKey || function(doc) {
   this._password = doc.getElementById('password');
   this._generateButton = doc.getElementById('generate');
 
-  this._options = new SkeletonKeyOptions();
+  // If this is an extension, use defaults until the Chrome settings are loaded.
+  var win = null;
+  if (!this._isChromeExtension())
+    win = window;
+  this._options = new SkeletonKeyOptions(null, win);
+
 
   this._init();
 };
@@ -181,8 +186,6 @@ SkeletonKey.prototype._selectPassword = function() {
  */
 SkeletonKey.prototype._initChromeExtension = function() {
   return;
-  if (typeof chrome == 'undefined' || typeof chrome.extension == 'undefined')
-    return;
 
   // getCurrent is undefined for backround pages. Need content script.
   chrome.tabs.getCurrent(function (tab) {
@@ -196,4 +199,13 @@ SkeletonKey.prototype._initChromeExtension = function() {
     var siteKey = url.search(/https?:\/\/(www.?|login|accounts?)\.(.*)\.(com?|net|org|edu|biz|info)?.*/);
     console.log(siteKey);
   });
+};
+
+/**
+ * Checks if SkeletonKey is running as a Chrome extension.
+ * @returns {bool}
+ * @private
+ */
+SkeletonKey.prototype._isChromeExtension = function() {
+  return typeof chrome != 'undefined' && typeof chrome.extension != 'undefined';
 };

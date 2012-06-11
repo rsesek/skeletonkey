@@ -21,10 +21,10 @@
 
 (function main() {
   document.addEventListener('DOMContentLoaded', function() {
-    var win = null;
+    var doc = null;
     if (window.location.pathname.indexOf('options.html') != -1)
-      win = window;
-    var controller = new SkeletonKeyOptions(win);
+      doc = document;
+    var controller = new SkeletonKeyOptions(doc, window);
   });
 })();
 
@@ -32,14 +32,17 @@
  * SkeletonKeyOptions is a controller for both retrieving settings and for
  * displaying the view.
  *
- * @param {Window} win The window and document on wich to operate.
+ * @param {HTMLDocument} doc The document on wich to operate.
+ * @param {Window} win The window to use for localStorage.
  */
-var SkeletonKeyOptions = SkeletonKeyOptions || function(win) {
+var SkeletonKeyOptions = SkeletonKeyOptions || function(doc, win) {
+  if (doc) {
+    this._maxLength = doc.getElementById('maxlength');
+    this._saveButton = doc.getElementById('save');
+    this._saveButton.onclick = this.onSave.bind(this);
+  }
   if (win) {
     this._storage = win.localStorage;
-    this._maxLength = win.document.getElementById('maxlength');
-    this._saveButton = win.document.getElementById('save');
-    this._saveButton.onclick = this.onSave.bind(this);
   }
 };
 
