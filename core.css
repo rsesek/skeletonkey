@@ -65,6 +65,7 @@ li input:focus {
 button {
   font-size: 1em;
   padding: .5em 1.0em;
+  margin: .5em;
   float: right;
 
   background-color: #CECECE;
@@ -76,6 +77,13 @@ button {
 
 button:active {
   border-color: rgb(15, 74, 169);
+}
+
+hr {
+  background-color: #CCCCCC;
+  border: none;
+  height: .1em;
+  margin: 1em .5em;
 }
 
 .clear {
