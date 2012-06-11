@@ -89,8 +89,14 @@ SkeletonKey.prototype._onGenerate = function(e) {
   // |key| is a WordArray of 32-bit words.
   var key = CryptoJS.PBKDF2(this._master.value, salt,
       {keySize: this.KEYSIZE, iterations: this.ITERATIONS});
+
   var hexString = key.toString();
   hexString = this._capitalizeKey(hexString);
+
+  var maxLength = this._options.getMaximumPasswordLength();
+  if (hexString.length > maxLength)
+    hexString = hexString.substr(0, maxLength);
+
   this._password.value = hexString;
   this._selectPassword();
 };
