@@ -42,6 +42,9 @@ var SkeletonKey = SkeletonKey || function(doc) {
   this._username = doc.getElementById('username');
   this._password = doc.getElementById('password');
   this._generateButton = doc.getElementById('generate');
+
+  this._options = new SkeletonKeyOptions();
+
   this._init();
 };
 
@@ -55,12 +58,6 @@ SkeletonKey.prototype.ITERATIONS = 1000;
  * @const {int}
  */
 SkeletonKey.prototype.KEYSIZE = 256/32;
-
-/**
- * The minimum length of a password.
- * @const {int}
- */
-SkeletonKey.prototype.MIN_LENGTH = 6;
 
 /**
  * Initializes event handlers for the page.
@@ -109,8 +106,8 @@ SkeletonKey.prototype._capitalizeKey = function(key) {
   // it as the basis for capitalizing the key.
   var capsSource = null;
   var keyLength = key.length;
-  if (keyLength / 2 <= this.MIN_LENGTH) {
-    capsSouce = key.substr(0, keyLength - this.MIN_LENGTH);
+  if (keyLength / 2 <= this._options.getMinimumPasswordLength()) {
+    capsSouce = key.substr(0, keyLength - this._options.getMinimumPasswordLength());
   } else {
     capsSource = key.substr(keyLength / 2);
   }

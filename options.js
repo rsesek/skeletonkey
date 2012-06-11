@@ -21,7 +21,10 @@
 
 (function main() {
   document.addEventListener('DOMContentLoaded', function() {
-    var controller = new SkeletonKeyOptions(window);
+    var win = null;
+    if (window.location.pathname.indexOf('options.html') != -1)
+      win = window;
+    var controller = new SkeletonKeyOptions(win);
   });
 })();
 
