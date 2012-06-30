@@ -9,17 +9,27 @@
     <h1>Skeleton Key</h1>
 
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-      id est laborum.
+      Skeleton Key is a password generator that uses
+      <a href="http://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a> to generate
+      secure, unique passwords for each website and account. It uses a master
+      password of your choosing, a unique &ldquo;site key&rdquo;, and your
+      username on the site to generate the password. This process is algorithmic,
+      meaning the same combination of inputs will always generate the same
+      output password. Skeleton Key hashes your password with the site key and
+      username 1,000 times, making it virtually impossible to get back your
+      original password.
+    </p>
+
+    <p>
+      This web page has been built for offline use, meaning that your web
+      browser can display Skeleton Key even without a network connection. This
+      allows you to lookup your passwords at any time. There is also a
+      <a href="#">Chrome Extension</a> that you can install. The
+      <a href="https://github.com/rsesek/skeletonkey">source code is also
+      available</a>.
     </p>
 
     <iframe id="core" src="core.html"></iframe>
-
     <iframe id="options" src="options.html"></iframe>
   </body>
 </html>

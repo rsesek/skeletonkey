@@ -25,6 +25,10 @@ body {
   width: 50em;
 }
 
+p {
+  margin-top: 1em;
+}
+
 iframe {
   border: none;
   padding: 0;
