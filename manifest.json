@@ -6,8 +6,17 @@
 
   "description": "A secure password generator that uses repeated hashing of your master password and some salt.",
 
+  "icons": {
+    "16": "icon19.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+
   "browser_action": {
     "default_title": "Skeleton Key",
-    "default_popup": "core.html"
-  }
+    "default_popup": "core.html",
+    "default_icon": "icon19.png"
+  },
+
+  "options_page": "options.html"
 }
