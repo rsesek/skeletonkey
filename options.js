@@ -44,6 +44,9 @@ var SkeletonKeyOptions = SkeletonKeyOptions || function(doc, win) {
   if (win) {
     this._storage = win.localStorage;
   }
+  if (this._maxLength) {
+    this._maxLength.value = this.getMaximumPasswordLength();
+  }
 };
 
 /**
