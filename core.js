@@ -80,7 +80,10 @@ SkeletonKey.prototype._init = function() {
 
   this._initChromeExtension();
 
-  this._master.focus();
+  // Chrome extensions will get the first field focused automatically, so only
+  // do it explicitly for hosted pages.
+  if (!this._isChromeExtension())
+    this._master.focus();
 };
 
 /**
