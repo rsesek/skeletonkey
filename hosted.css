@@ -53,3 +53,28 @@ iframe {
 #options {
   height: 6.25em;
 }
+
+@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+  body {
+    background-color: #FFF;
+  }
+
+  h1 {
+    font-size: 4em;
+  }
+  p {
+    display: none;
+  }
+
+  iframe {
+    width: 100%;
+    border: none;
+  }
+
+  #core {
+    height: 20em;
+  }
+  #options {
+    height: 10em;
+  }
+}
