@@ -20,12 +20,6 @@
  */
 
 (function main() {
-  if (typeof chrome !== 'undefined') {
-    // TODO: load the extension JS
-  } else {
-    // TODO: load the hosted JS
-  }
-
   document.addEventListener('DOMContentLoaded', function() {
     var controller = new SkeletonKey(document);
   });
@@ -78,12 +72,13 @@ SkeletonKey.prototype._init = function() {
   this._password.onclick = this._selectPassword.bind(this);
   this._password.labels[0].onclick = this._selectPassword.bind(this);
 
-  this._initChromeExtension();
-
-  // Chrome extensions will get the first field focused automatically, so only
-  // do it explicitly for hosted pages.
-  if (!this._isChromeExtension())
+  if (this._isChromeExtension()) {
+    this._initChromeExtension();
+  } else {
+    // Chrome extensions will get the first field focused automatically, so only
+    // do it explicitly for hosted pages.
     this._master.focus();
+  }
 };
 
 /**
@@ -188,20 +183,22 @@ SkeletonKey.prototype._selectPassword = function() {
  * @private
  */
 SkeletonKey.prototype._initChromeExtension = function() {
-  return;
-
-  // getCurrent is undefined for backround pages. Need content script.
-  chrome.tabs.getCurrent(function (tab) {
-    if (tab == null)
+  var query = {
+    "active": true,
+    "currentWindow": true
+  };
+  chrome.tabs.query(query, function (tabs) {
+    console.log(tabs);
+    if (tabs == null || tabs.length != 1)
       return;
 
-    var url = tab.url;
+    var url = tabs[0].url;
     if (url == null || url == "")
       return;
 
-    var siteKey = url.search(/https?:\/\/(www.?|login|accounts?)\.(.*)\.(com?|net|org|edu|biz|info)?.*/);
-    console.log(siteKey);
-  });
+    var matches = url.match(/https?:\/\/(www|login|accounts?|.*\.)\.?(.*)\.(com?|net|org|edu|biz|info)?.*/);
+    this._sitekey.value = matches[2];
+  }.bind(this));
 };
 
 /**
@@ -210,5 +207,5 @@ SkeletonKey.prototype._initChromeExtension = function() {
  * @private
  */
 SkeletonKey.prototype._isChromeExtension = function() {
-  return typeof chrome != 'undefined' && typeof chrome.extension != 'undefined';
+  return typeof chrome !== undefined && typeof chrome.extension !== undefined;
 };
