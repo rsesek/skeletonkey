@@ -196,8 +196,28 @@ SkeletonKey.prototype._initChromeExtension = function() {
     if (url == null || url == "")
       return;
 
-    var matches = url.match(/https?:\/\/(www|login|accounts?|.*\.)\.?(.*)\.(com?|net|org|edu|biz|info)?.*/);
-    this._sitekey.value = matches[2];
+    // Use a link to clevely parse the URL into the hostname.
+    var parser = document.createElement("a");
+    parser.href = url;
+    var hostname = parser.hostname.split(".");
+
+    // Filter out common subdomains and TLDs to keep the siteky short and
+    // memorable.
+    ["www", "login", "account", "accounts"].forEach(function(subdomain) {
+      if (hostname[0] == subdomain) {
+        hostname.shift();
+        return;
+      }
+    });
+
+    ["com", "net", "org", "edu", "info"].forEach(function(tld) {
+      if (hostname[hostname.length - 1] == tld) {
+        hostname.pop();
+        return;
+      }
+    });
+
+    this._sitekey.value = hostname.join(".");
   }.bind(this));
 };
 
