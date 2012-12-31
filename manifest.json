@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Skeleton Key",
-  "version": "2",
+  "version": "3",
 
   "description": "A secure password generator that uses repeated hashing of your master password and some salt.",
 
