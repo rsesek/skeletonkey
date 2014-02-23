@@ -69,8 +69,15 @@ SkeletonKey.prototype._init = function() {
   this._sitekey.onkeyup = this._nextFieldInterceptor.bind(this);
   this._username.onkeyup = this._nextFieldInterceptor.bind(this);
 
-  this._password.onclick = this._selectPassword.bind(this);
-  this._password.labels[0].onclick = this._selectPassword.bind(this);
+  this._password.onmousedown = this._selectPassword.bind(this);
+  this._password.labels[0].onmousedown = this._selectPassword.bind(this);
+
+  function eatEvent(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  this._password.onmouseup = eatEvent;
+  this._password.labels[0].onmouseup = eatEvent;
 
   if (this._isChromeExtension()) {
     this._initChromeExtension();
