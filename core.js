@@ -227,5 +227,5 @@ SkeletonKey.prototype._initChromeExtension = function() {
  * @private
  */
 SkeletonKey.prototype._isChromeExtension = function() {
-  return typeof chrome !== undefined && typeof chrome.extension !== undefined;
+  return typeof chrome !== 'undefined' && typeof chrome.tabs !== 'undefined';
 };
