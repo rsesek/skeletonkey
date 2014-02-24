@@ -87,9 +87,14 @@ hr {
     width: 90%;
   }
 
+  li {
+    margin-bottom: 2em;
+  }
+
   li input {
     display: block;
     width: 100%;
+    box-sizing: border-box;
   }
 
   li label {
@@ -100,5 +105,9 @@ hr {
     float: none;
     width: 100%;
     margin: 0;
+  }
+
+  hr {
+    display: none;
   }
 }

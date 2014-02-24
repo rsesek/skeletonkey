@@ -55,14 +55,9 @@ iframe {
 }
 
 @media screen and (max-width: 800px) {
-  html {
-    padding: 0;
-    margin: 0;
-  }
-
   body {
     background-color: #FFF;
-    width: 99%;
+    width: 100%;
   }
 
   h1 {
@@ -75,14 +70,15 @@ iframe {
   iframe {
     width: 100%;
     border: none;
-    margin: 0.1em;
+    margin: 1em 0;
     overflow: hidden;
   }
 
-  #core {
-    height: 20em;
+  iframe#core {
+    height: 30em;
   }
-  #options {
-    height: 10em;
+
+  iframe#options {
+    display: none;
   }
 }
