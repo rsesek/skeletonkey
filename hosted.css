@@ -54,13 +54,19 @@ iframe {
   height: 6.25em;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+@media screen and (max-width: 800px) {
+  html {
+    padding: 0;
+    margin: 0;
+  }
+
   body {
     background-color: #FFF;
+    width: 99%;
   }
 
   h1 {
-    font-size: 4em;
+    font-size: 1.5em;
   }
   p {
     display: none;
@@ -69,6 +75,8 @@ iframe {
   iframe {
     width: 100%;
     border: none;
+    margin: 0.1em;
+    overflow: hidden;
   }
 
   #core {
