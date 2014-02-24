@@ -69,15 +69,13 @@ SkeletonKey.prototype._init = function() {
   this._sitekey.onkeyup = this._nextFieldInterceptor.bind(this);
   this._username.onkeyup = this._nextFieldInterceptor.bind(this);
 
-  this._password.onmousedown = this._selectPassword.bind(this);
-  this._password.labels[0].onmousedown = this._selectPassword.bind(this);
-
-  function eatEvent(e) {
-    e.stopPropagation();
-    e.preventDefault();
+  if (!this._isTouchDevice()) {
+    this._password.onmousedown = this._selectPassword.bind(this);
+    this._password.onmouseup = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    };
   }
-  this._password.onmouseup = eatEvent;
-  this._password.labels[0].onmouseup = eatEvent;
 
   if (this._isChromeExtension()) {
     this._initChromeExtension();
@@ -107,7 +105,7 @@ SkeletonKey.prototype._onGenerate = function(e) {
   if (hexString.length > maxLength)
     hexString = hexString.substr(0, maxLength);
 
-  this._password.value = hexString;
+  this._password.innerText = hexString;
   this._selectPassword();
 };
 
@@ -181,8 +179,19 @@ SkeletonKey.prototype._nextFieldInterceptor = function(e) {
  * @private
  */
 SkeletonKey.prototype._selectPassword = function() {
-  this._password.focus();
-  this._password.select();
+  this._generateButton.blur();
+
+  // Touch devices do not bring up the edit controls (for copy) for
+  // pre-selected text.
+  if (this._isTouchDevice())
+    return;
+
+  var range = document.createRange();
+  range.selectNode(this._password.firstChild);  // Select #text node.
+
+  var selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
 };
 
 /**
@@ -236,3 +245,12 @@ SkeletonKey.prototype._initChromeExtension = function() {
 SkeletonKey.prototype._isChromeExtension = function() {
   return typeof chrome !== 'undefined' && typeof chrome.tabs !== 'undefined';
 };
+
+/**
+ * Checks if SkeletonKey is running on a touch device.
+ * @returns {bool}
+ * @private
+ */
+SkeletonKey.prototype._isTouchDevice = function() {
+  return typeof document.createTouch === 'function';
+}

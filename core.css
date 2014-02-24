@@ -38,7 +38,8 @@ li label {
   font-weight: bold;
 }
 
-li input {
+li input, li .input {
+  display: inline-block;
   padding: .3em;
   width: 22em;
   font-size: 1em;
@@ -91,7 +92,7 @@ hr {
     margin-bottom: 1.4em;
   }
 
-  li input {
+  li input, li .input {
     display: block;
     width: 100%;
     box-sizing: border-box;
