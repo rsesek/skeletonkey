@@ -18,7 +18,7 @@
 
   "browser_action": {
     "default_title": "Skeleton Key",
-    "default_popup": "core.html",
+    "default_popup": "extension.html",
     "default_icon": "icon19.png"
   }
 }

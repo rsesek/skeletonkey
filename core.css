@@ -80,7 +80,7 @@ hr {
   clear: both;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 450px) {
   body {
     margin: 0;
     padding: 0;

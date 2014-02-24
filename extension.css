@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 Robert Sesek <http://robert.sesek.com>
+/* Copyright (c) 2014 Robert Sesek <http://robert.sesek.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -20,57 +20,10 @@
  */
 
 body {
-  background-color: #EFEFEF;
-  margin: 0 auto;
-  width: 50em;
-}
-
-p {
-  margin-top: 1em;
+  width: 36em;
+  padding: .2em;
 }
 
 iframe {
-  margin: 3em 0;
-  width: 37em;
-  background-color: #FFF;
-  border-color: #CCC;
-  border-style: solid;
-  border-width: .1em;
-}
-
-#core {
-  height: 15em;
-}
-
-#options {
-  height: 6.25em;
-}
-
-@media screen and (max-width: 800px) {
-  body {
-    background-color: #FFF;
-    width: 100%;
-  }
-
-  h1 {
-    font-size: 1.5em;
-  }
-  p {
-    display: none;
-  }
-
-  iframe {
-    width: 100%;
-    border: none;
-    margin: 1em 0;
-    overflow: hidden;
-  }
-
-  iframe#core {
-    height: 30em;
-  }
-
-  iframe#options {
-    display: none;
-  }
+  height: 14.5em;
 }

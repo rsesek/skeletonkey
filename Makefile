@@ -1,4 +1,5 @@
 ZIP_FILES=manifest.json \
+	  extension.html \
 	  core.html \
 	  core.css \
 	  core.js \
